@@ -73,9 +73,6 @@ def show_edit_form(usr_id):
 
 @app.route("/users/<int:usr_id>/edit", methods=["POST"])
 def edit_user(usr_id):
-    print("**********************************************")
-    print("yyyyyyyyyyyyyyyyyyyyy")
-    print("**********************************************")
     user = User.query.get(usr_id)
     user.first_name= request.form['firstName']
     user.last_name = request.form['lastName']
@@ -92,25 +89,3 @@ def delete_user(usr_id):
 
     db.session.commit()
     return redirect("/users")
-# @app.route("/", methods=["POST"])
-# def add_pet():
-#     """Add pet and redirect to list."""
-
-#     name = request.form['name']
-#     species = request.form['species']
-#     hunger = request.form['hunger']
-#     hunger = int(hunger) if hunger else None
-
-#     pet = Pet(name=name, species=species, hunger=hunger)
-#     db.session.add(pet)
-#     db.session.commit()
-
-#     return redirect(f"/{pet.id}")
-
-
-# @app.route("/<int:pet_id>")
-# def show_pet(pet_id):
-#     """Show info on a single pet."""
-
-#     pet = Pet.query.get_or_404(pet_id)
-#     return render_template("detail.html", pet=pet)

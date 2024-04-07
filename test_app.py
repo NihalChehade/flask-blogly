@@ -21,17 +21,16 @@ app.config['DEBUG_TB_HOSTS'] = ['dont-show-debug-toolbar']
 
 class ViewsTestCase(TestCase):
     def setUp(self):
-        self.app = app.test_client()  # Create a test client for the Flask app
         self.ctx = app.app_context()
         self.ctx.push()  # Push the application context
         db.drop_all()
         db.create_all()
-        """Add sample pet."""
+    
         user = User(first_name="Nihal", last_name = "Chehade", image_url= "")
        
         db.session.add(user)
         db.session.commit()
-        # Create any test data or perform setup here
+      
 
     def tearDown(self):
         db.session.rollback()  # Remove the database session
