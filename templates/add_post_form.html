@@ -3,7 +3,7 @@
 {% block title %} Add Post {% endblock %}
 
 {% block main %}
-<h1 class="display-1">Add Post for {{user.name}}</h1>
+<h1>Add Post for {{user.first_name}} {{user.last_name}}</h1>
 <form action="/users/{{user.id}}/posts/new" method="post">
     <div class="mb-3">
         <label for="title" class="form-label">Title</label>
@@ -13,7 +13,16 @@
         <label for="content" class="form-label">Content</label>
         <textarea class="form-control" id="content" rows="3" name="post-content"></textarea>
       </div>
-      <a href="/users/{{user.id}}"><button type="button" class="btn btn-info mb-3">Cancel</button></a>
-      <button type="submit" class="btn btn-success mb-3">Add</button>
-</form>
+      <ul class="ul_no_bullets">
+        {% for tag in tags %}
+        <li><input type="checkbox" name="selected-tags" value="{{tag.id}}">{{tag.name}}</li>
+        {% endfor %}
+      </ul>
+
+      <div class="form-group row">
+        <div class="ml-auto mr-3">
+          <a href="/users/{{ user.id }}" class="btn btn-info">Cancel</a>
+          <button type="submit" class="btn btn-success">Add</button>
+        </div>
+      </div>
 {% endblock %}

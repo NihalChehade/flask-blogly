@@ -1,16 +1,26 @@
-{% extends 'base.html' %} 
-{% block title %} Post Details {% endblock %}
-    {% block main %}
-    <h1 class="display-1">{{post.title}} </h1>
-    <div>
-        {{post.content}}
-    </div>
-    <div>
-        <em> By  {{post.user.first_name}} {{post.user.last_name}}</em>
-    </div>
-    <div>
-        <a href="/users/{{post.user.id}}"><button type="button" class="btn btn-primary">Cancel</button></a>
-        <a href="/posts/{{post.id}}/edit"><button type="button" class="btn btn-primary">Edit</button></a>
-        <a href="/posts/{{post.id}}/delete"><button type="button" class="btn btn-danger">Delete</button></a>
-    </div>
-    {% endblock %}
+{% extends 'base.html' %}
+ {% block title %} Post Details {% endblock %}
+
+ {% block main %}
+<h1>{{post.title}}</h1>
+<div>
+  {{post.content}}
+</div>
+<div>
+  <em> By {{post.user.first_name}} {{post.user.last_name}}</em>
+</div>
+
+{% if post.tags %}
+<div>
+  <b>Tags:</b>
+  {% for tag in post.tags %}
+  <a href="/tags/{{tag.id}}"><i>{{tag.name}}</i></a>
+  {% endfor %}
+</div>
+{% endif %}
+<form>
+<button class="btn btn-outline-primary" formmethod="GET" formaction="/users/{{ post.user_id }}">Cancel </button>
+<button class="btn btn-primary" formmethod="GET" formaction="/posts/{{ post.id }}/edit">Edit </button>
+<button class="btn btn-danger" formmethod="POST" formaction="/posts/{{ post.id }}/delete">Delete </button>
+</form>
+{% endblock %}
